@@ -14,26 +14,27 @@ class App extends Component {
 
   clearSetTimeOut = null;
 
-  componentDidMount() {
-    let cep = null;
-
-    fetch('viacep.com.br/ws/01001000/json/')
-    .then((cep) => cep.json())
-    .then((jsonCep) => {
-      cep = jsonCep;
-    })
+  async componentDidMount() {
+    const data = await this.fetchApi();
 
     this.setState({
-      text: cep,
+      text: data.cep,
     });
   }
 
+  fetchApi = async () => {
+    const response = await fetch('http://viacep.com.br/ws/40713030/json');
+    const jsonText = await response.json();
+
+    return jsonText;
+  }
+
   componentDidUpdate() {
-    this.setTimeOutState();
+    // this.setTimeOutState();
   }
 
   componentWillUnmount() {
-    clearTimeout(this.clearSetTimeOut);
+    // clearTimeout(this.clearSetTimeOut);
   }
 
   setTimeOutState = () => {
