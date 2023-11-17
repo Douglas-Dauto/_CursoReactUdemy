@@ -7,6 +7,10 @@ class App extends Component {
     counter: 0
   }
 
+  /*
+    Não é recomendado usar o this.state dentro do setState porque corremos o risco de não pegar o estado anterior correto, para resolver isto usamos uma função de callback que recebe prevState e prevProps.
+  */
+
   handleClick = () => {
     this.setState(
       (prevState, prevProps) => {
@@ -14,6 +18,12 @@ class App extends Component {
       }  
     );
   }
+  /* 
+    mesma coisa que:
+
+    this.setState({ counter: this.state.counter + 1 });
+  */
+  // OBS: A mesma situação se aplica a prevProps.
 
   render() {
     return (
